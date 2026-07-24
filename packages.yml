@@ -1,0 +1,4 @@
+packages:
+  - private: saraleon1/snow-jaffle-omni-partner
+    provider: "github"
+    revision: "main"
