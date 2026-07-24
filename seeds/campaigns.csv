@@ -1,0 +1,11 @@
+campaign_id,campaign_name,channel,sub_channel,campaign_type,start_date,end_date,monthly_budget
+C001,Spring Brand Push,paid_social,facebook,awareness,2024-01-15,2024-04-30,8000
+C002,Q1 Search Capture,paid_search,google,acquisition,2024-01-01,2024-03-31,12000
+C003,Newsletter Nurture,email,mailchimp,retention,2024-01-01,2024-06-30,1500
+C004,Retargeting - Site Visitors,paid_social,instagram,retargeting,2024-02-01,2024-05-31,5000
+C005,Webinar Lead Gen,content,organic,acquisition,2024-03-01,2024-03-31,2000
+C006,Summer Sale Promo,paid_search,google,acquisition,2024-04-01,2024-06-30,15000
+C007,LinkedIn ABM Pilot,paid_social,linkedin,acquisition,2024-04-15,2024-07-31,6000
+C008,Display Remarketing,display,google_display,retargeting,2024-05-01,2024-08-31,4000
+C009,Fall Product Launch,paid_social,facebook,awareness,2024-07-01,2024-09-30,10000
+C010,Podcast Sponsorship,content,podcast,awareness,2024-06-01,2024-11-30,3000
