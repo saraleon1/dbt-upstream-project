@@ -1,0 +1,18 @@
+packages:
+  - name: jaffle_shop
+    private: saraleon1/snow-jaffle-omni-partner
+    provider: github
+    revision: 1fe64f4c45085cfbd7763f8a4ee0544fef741bfc
+  - name: dbt_utils
+    package: dbt-labs/dbt_utils
+    version: 1.1.1
+  - name: dbt_date
+    package: godatadriven/dbt_date
+    version: 0.10.0
+  - git: https://github.com/dbt-labs/dbt-audit-helper.git
+    name: audit_helper
+    revision: 71817f0a7fa3df9f63adb90db0cf28f7423f720b
+  - name: dbt_constraints
+    package: Snowflake-Labs/dbt_constraints
+    version: 1.0.8
+sha1_hash: b38d72e78a496f9e1f82deb0fb6b1d6d3aea95cc
