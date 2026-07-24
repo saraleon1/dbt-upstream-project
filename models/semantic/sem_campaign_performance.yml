@@ -1,0 +1,114 @@
+semantic_models:
+  - name: campaign_performance
+    description: "Marketing campaign performance combining spend, engagement, and lead generation metrics"
+    model: ref('fct_campaign_performance')
+    defaults:
+      agg_time_dimension: start_date
+
+    entities:
+      - name: campaign
+        type: primary
+        expr: campaign_id
+
+    dimensions:
+      - name: campaign_name
+        type: categorical
+      - name: channel
+        type: categorical
+        description: "Marketing channel: paid_search, paid_social, email, content, display"
+      - name: sub_channel
+        type: categorical
+        description: "Specific platform: google, facebook, instagram, linkedin, mailchimp, etc."
+      - name: campaign_type
+        type: categorical
+        description: "Campaign objective: awareness, acquisition, retention, retargeting"
+      - name: start_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: end_date
+        type: time
+        type_params:
+          time_granularity: day
+
+    measures:
+      - name: total_spend
+        agg: sum
+        expr: total_spend
+        description: "Total ad spend in USD"
+      - name: total_impressions
+        agg: sum
+        expr: total_impressions
+      - name: total_clicks
+        agg: sum
+        expr: total_clicks
+      - name: total_leads
+        agg: sum
+        expr: total_leads
+      - name: converted_leads
+        agg: sum
+        expr: converted_leads
+      - name: lost_leads
+        agg: sum
+        expr: lost_leads
+      - name: open_leads
+        agg: sum
+        expr: open_leads
+      - name: campaign_count
+        agg: count_distinct
+        expr: campaign_id
+      - name: avg_days_to_convert
+        agg: average
+        expr: avg_days_to_convert
+
+metrics:
+  - name: total_ad_spend
+    label: "Total Ad Spend"
+    description: "Total marketing spend across campaigns"
+    type: simple
+    type_params:
+      measure: total_spend
+
+  - name: total_leads_generated
+    label: "Total Leads"
+    description: "Total leads generated across all statuses"
+    type: simple
+    type_params:
+      measure: total_leads
+
+  - name: total_converted_leads
+    label: "Converted Leads"
+    description: "Leads that converted to customers"
+    type: simple
+    type_params:
+      measure: converted_leads
+
+  - name: cost_per_lead
+    label: "Cost per Lead (CPL)"
+    description: "Average cost to generate one lead"
+    type: derived
+    type_params:
+      expr: total_ad_spend / nullif(total_leads_generated, 0)
+      metrics:
+        - name: total_ad_spend
+        - name: total_leads_generated
+
+  - name: lead_conversion_rate
+    label: "Lead Conversion Rate"
+    description: "Percentage of leads that converted"
+    type: derived
+    type_params:
+      expr: (total_converted_leads * 1.0 / nullif(total_leads_generated, 0)) * 100
+      metrics:
+        - name: total_converted_leads
+        - name: total_leads_generated
+
+  - name: cost_per_acquisition
+    label: "Cost per Acquisition (CPA)"
+    description: "Cost per converted lead"
+    type: derived
+    type_params:
+      expr: total_ad_spend / nullif(total_converted_leads, 0)
+      metrics:
+        - name: total_ad_spend
+        - name: total_converted_leads
